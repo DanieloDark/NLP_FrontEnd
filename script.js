@@ -36,18 +36,29 @@ const mockLexicon = {
 // Animation on load
 window.addEventListener('load', () => {
     const demo = document.getElementById('animationDemo');
-    const words = ['nagbasa', 'basa'];
-    let i = 0;
-    setInterval(() => {
-        demo.textContent = words[i % 2] + (i % 2 === 0 ? ' →' : '');
-        i++;
-    }, 1500);
+    if (demo) {
+        const words = ['nagbasa', 'basa'];
+        let i = 0;
+        setInterval(() => {
+            demo.textContent = words[i % 2] + (i % 2 === 0 ? ' →' : '');
+            i++;
+        }, 1500);
+    }
 });
 
 // Page navigation
 function showPage(pageId) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById(pageId).classList.add('active');
+    
+    // Show/hide navigation based on page
+    const nav = document.getElementById('mainNav');
+    if (pageId === 'landing') {
+        nav.classList.remove('show');
+    } else {
+        nav.classList.add('show');
+    }
+    
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
